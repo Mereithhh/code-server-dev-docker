@@ -26,8 +26,7 @@ RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
     echo "bind-addr: 0.0.0.0:2333" > /root/.config/code-server/config.yaml && \
     echo "auth: password" >> /root/.config/code-server/config.yaml && \
     echo "password: admin" >> /root/.config/code-server/config.yaml && \
-    echo "cert: false" >> /root/.config/code-server/config.yaml  && \
-    sed -t 
+    echo "cert: false" >> /root/.config/code-server/config.yaml
 EXPOSE 2333 222 3000 3001 3002
 VOLUME [ "/code"]
 ENTRYPOINT [ "service ssh start","&&","code-server"]
