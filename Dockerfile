@@ -29,5 +29,5 @@ RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
     echo "cert: false" >> /root/.config/code-server/config.yaml
 EXPOSE 2333 222 3000 3001 3002
 VOLUME [ "/code"]
-ENTRYPOINT [ "service ssh start","&&","code-server"]
+ENTRYPOINT [ "entrypoint.sh"]
 
