@@ -9,8 +9,8 @@ RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
     echo "Asia/Shanghai" > /etc/timezone && \
     sed -i s@/archive.ubuntu.com/@/mirrors.tuna.tsinghua.edu.cn/@g /etc/apt/sources.list && \
     sed -i s@/security.ubuntu.com/@/mirrors.tuna.tsinghua.edu.cn/@g /etc/apt/sources.list && \
-    sed -i 's/#Port 22/Port 222/g' /etc/ssh/sshd_config && \
     apt-get update && apt-get install -y git curl vim tmux net-tools gcc python make g++ openssh-server &&  \
+    sed -i 's/#Port 22/Port 222/g' /etc/ssh/sshd_config && \
     echo 'export NVM_DIR="/root/.nvm"' >> /root/.bashrc && \
     echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" ' >> /root/.bashrc && \
     echo '[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"' >> /root/.bashrc && \
