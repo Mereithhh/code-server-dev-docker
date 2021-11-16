@@ -7,8 +7,10 @@ SHELL ["/bin/bash","-c"]
 RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \ 
     rm -rf /bin/sh && ln -s /bin/bash /bin/sh && \ 
     echo "Asia/Shanghai" > /etc/timezone && \
-    sed -i s@/ports.ubuntu.com/@/mirrors.tuna.tsinghua.edu.cn/@g /etc/apt/sources.list && \
-    apt-get update && apt-get install -y git curl vim tmux net-tools gcc python make g++ &&  \
+    sed -i s@/archive.ubuntu.com/@/mirrors.tuna.tsinghua.edu.cn/@g /etc/apt/sources.list && \
+    sed -i s@/security.ubuntu.com/@/mirrors.tuna.tsinghua.edu.cn/@g /etc/apt/sources.list && \
+    sed -i 's/#Port 22/Port 222/g' /etc/ssh/sshd_config && \
+    apt-get update && apt-get install -y git curl vim tmux net-tools gcc python make g++ openssh-server &&  \
     echo 'export NVM_DIR="/root/.nvm"' >> /root/.bashrc && \
     echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" ' >> /root/.bashrc && \
     echo '[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"' >> /root/.bashrc && \
@@ -24,9 +26,9 @@ RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
     echo "bind-addr: 0.0.0.0:2333" > /root/.config/code-server/config.yaml && \
     echo "auth: password" >> /root/.config/code-server/config.yaml && \
     echo "password: admin" >> /root/.config/code-server/config.yaml && \
-    echo "cert: false" >> /root/.config/code-server/config.yaml  
-COPY ./entrypoint.sh /
-EXPOSE 80
+    echo "cert: false" >> /root/.config/code-server/config.yaml  && \
+    sed -t 
+EXPOSE 2333 222 3000 3001 3002
 VOLUME [ "/code"]
-ENTRYPOINT [ "/entrypoint.sh"]
+ENTRYPOINT [ "service ssh start","&&","code-server"]
 
