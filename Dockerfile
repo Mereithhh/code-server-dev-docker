@@ -27,7 +27,8 @@ RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
     echo "auth: password" >> /root/.config/code-server/config.yaml && \
     echo "password: admin" >> /root/.config/code-server/config.yaml && \
     echo "cert: false" >> /root/.config/code-server/config.yaml
+COPY ./entrypoint.sh /
 EXPOSE 2333 222 3000 3001 3002
 VOLUME [ "/code"]
-ENTRYPOINT [ "/entrypoint.sh"]
+CMD [ "/entrypoint.sh"]
 
