@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: code-server
+spec:
+  selector:
+    matchLabels:
+      run: code-server
+  template:
+    metadata:
+        labels:
+          run: code-server
+    spec:
+      hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
+      containers:
+      - name: code-server
+        image: mereith/ubuntu-dev:0.0.4
+        volumeMounts:
+          - mountPath: /code
+            name: code
+        resources:
+          requests:
+            cpu: 500m
+            memory: 512Mi
+          limits:
+            cpu: 1000m
+            memory: 1000Mi
+      volumes:
+        - name: code
+          hostPath:
+            path: /code
