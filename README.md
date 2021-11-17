@@ -10,3 +10,7 @@ docker pull mereith/ubuntu-dev:latest
 docker run -d --name ubuntu-dev -v $(pwd):/code --network host mereith/ubuntu-dev:latest 
 # ssh -> 223 , code-server -> 2333
 ```
+## kubernetes
+```
+kubectl apply -f k8s-deployment.yaml
+```
