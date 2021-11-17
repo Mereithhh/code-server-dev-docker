@@ -15,7 +15,7 @@ spec:
       dnsPolicy: ClusterFirstWithHostNet
       containers:
       - name: code-server
-        image: mereith/ubuntu-dev:0.0.4
+        image: mereith/ubuntu-dev:latest
         volumeMounts:
           - mountPath: /code
             name: code
