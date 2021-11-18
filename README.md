@@ -12,9 +12,12 @@ docker run -d --name ubuntu-dev -v $(pwd):/code --network host  \
 --cpus=1 \
 -m 2G --memory-swap=0 \
 mereith/ubuntu-dev:latest <your password>
-# ssh -> 223 , code-server -> 2333
 ```
-https://<your ip>:2333
+
+url:    https://<ip>:2333
+  
+port:    ssh -> 222     code-server -> 2333
+  
 ## kubernetes
 ```
 kubectl apply -f k8s-deployment.yaml
