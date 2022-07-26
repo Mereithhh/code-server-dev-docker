@@ -15,14 +15,15 @@ cpu & mem limit depends on you.
 ```
 docker pull mereith/ubuntu-dev:latest
 docker run -d --name ubuntu-dev -v $(pwd):/code --network host  \
+-p 80:80 \
 --cpus=1 \
 -m 2G --memory-swap=0 \
 mereith/ubuntu-dev:latest <your password>
 ```
 
-url: https://<ip>:2333
+url: https://<ip>
 
-port: ssh -> 222 code-server -> 2333
+port: ssh -> 222 code-server -> 80
 
 ## node-gyp support
 

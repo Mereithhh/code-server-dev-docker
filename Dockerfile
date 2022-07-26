@@ -23,14 +23,14 @@ RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
     yarn config set sass_binary_site http://cdn.npm.taobao.org/dist/node-sass -g && \
     curl -fsSL https://code-server.dev/install.sh | sh && \
     mkdir -p /root/.config/code-server/ && \
-    echo "bind-addr: 0.0.0.0:2333" > /root/.config/code-server/config.yaml && \
+    echo "bind-addr: 0.0.0.0:80" > /root/.config/code-server/config.yaml && \
     echo "auth: password" >> /root/.config/code-server/config.yaml && \
     echo "password: admin" >> /root/.config/code-server/config.yaml && \
     echo "cert: true" >> /root/.config/code-server/config.yaml
 COPY entrypoint.sh /
 COPY ./hosts ./
 RUN chmod 777 /entrypoint.sh
-EXPOSE 2333 222 
+EXPOSE 80 222 
 VOLUME [ "/code"]
 ENTRYPOINT [ "/entrypoint.sh"]
 
