@@ -26,7 +26,7 @@ RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
     echo "bind-addr: 0.0.0.0:80" > /root/.config/code-server/config.yaml && \
     echo "auth: password" >> /root/.config/code-server/config.yaml && \
     echo "password: admin" >> /root/.config/code-server/config.yaml && \
-    echo "cert: true" >> /root/.config/code-server/config.yaml
+    echo "cert: false" >> /root/.config/code-server/config.yaml
 COPY entrypoint.sh /
 COPY ./hosts ./
 RUN chmod 777 /entrypoint.sh
