@@ -29,7 +29,6 @@ RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
     echo "cert: true" >> /root/.config/code-server/config.yaml
 COPY entrypoint.sh /
 COPY ./hosts ./
-RUN  cat /code/hosts >> /etc/hosts
 RUN chmod 777 /entrypoint.sh
 EXPOSE 2333 222 
 VOLUME [ "/code"]

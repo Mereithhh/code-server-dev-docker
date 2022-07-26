@@ -8,24 +8,24 @@ spec:
       run: code-server
   template:
     metadata:
-        labels:
-          run: code-server
+      labels:
+        run: code-server
     spec:
       hostNetwork: true
       dnsPolicy: ClusterFirstWithHostNet
       containers:
-      - name: code-server
-        image: mereith/ubuntu-dev:latest
-        volumeMounts:
-          - mountPath: /code
-            name: code
-        resources:
-          requests:
-            cpu: 500m
-            memory: 512Mi
-          limits:
-            cpu: 1000m
-            memory: 1000Mi
+        - name: code-server
+          image: mereith/code-server:latest
+          volumeMounts:
+            - mountPath: /code
+              name: code
+          resources:
+            requests:
+              cpu: 500m
+              memory: 512Mi
+            limits:
+              cpu: 1000m
+              memory: 1000Mi
       volumes:
         - name: code
           hostPath:
