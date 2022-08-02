@@ -9,12 +9,12 @@ RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
     echo "Asia/Shanghai" > /etc/timezone && \
     sed -i s@/archive.ubuntu.com/@/mirrors.tuna.tsinghua.edu.cn/@g /etc/apt/sources.list && \
     sed -i s@/security.ubuntu.com/@/mirrors.tuna.tsinghua.edu.cn/@g /etc/apt/sources.list && \
-    apt-get update && apt-get install -y git curl vim tmux net-tools openssh-server &&  \
-    sed -i 's/#Port 22/Port 222/g' /etc/ssh/sshd_config && \
-    echo 'export NVM_DIR="/root/.nvm"' >> /root/.bashrc && \
-    echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" ' >> /root/.bashrc && \
-    echo '[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"' >> /root/.bashrc && \
-    source /root/.bashrc && \
+    apt-get update && apt-get install -y git curl vim tmux net-tools openssh-server zsh
+RUN chsh -s /bin/zsh \
+    echo 'export NVM_DIR="/root/.nvm"' >> /root/.zshrc && \
+    echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" ' >> /root/.zshrc && \
+    echo '[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"' >> /root/.zshrc && \
+    source /root/.zshrc && \
     export NVM_DIR="/root/.nvm" && [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" && [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  && \
     nvm install v16.16.0 && nvm alias system v16.16.0 && nvm alias system v16.16.0 && \
     npm config set registry https://registry.npm.taobao.org &&   \
@@ -23,14 +23,14 @@ RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
     yarn config set sass_binary_site http://cdn.npm.taobao.org/dist/node-sass -g && \
     curl -fsSL https://code-server.dev/install.sh | sh && \
     mkdir -p /root/.config/code-server/ && \
-    echo "bind-addr: 0.0.0.0:80" > /root/.config/code-server/config.yaml && \
-    echo "auth: password" >> /root/.config/code-server/config.yaml && \
+    echo "bind-addr: 0.0.0.0:13337" > /root/.config/code-server/config.yaml && \
+    echo "auth: none" >> /root/.config/code-server/config.yaml && \
     echo "password: admin" >> /root/.config/code-server/config.yaml && \
     echo "cert: false" >> /root/.config/code-server/config.yaml
+RUN sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 COPY entrypoint.sh /
-COPY ./hosts ./
 RUN chmod 777 /entrypoint.sh
-EXPOSE 80 222 
+EXPOSE 13337 222 
 VOLUME [ "/code"]
-ENTRYPOINT [ "/entrypoint.sh"]
+CMD [ "/entrypoint.sh"]
 
