@@ -10,8 +10,9 @@ RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
     sed -i s@/archive.ubuntu.com/@/mirrors.tuna.tsinghua.edu.cn/@g /etc/apt/sources.list && \
     sed -i s@/security.ubuntu.com/@/mirrors.tuna.tsinghua.edu.cn/@g /etc/apt/sources.list && \
     apt-get update && apt-get install -y git curl vim tmux net-tools openssh-server zsh
-RUN chsh -s /bin/zsh \
-    echo 'export NVM_DIR="/root/.nvm"' >> /root/.zshrc && \
+RUN sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/v1.1.2/zsh-in-docker.sh)"
+SHELL ["/bin/zsh","-c"]
+RUN echo 'export NVM_DIR="/root/.nvm"' >> /root/.zshrc && \
     echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" ' >> /root/.zshrc && \
     echo '[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"' >> /root/.zshrc && \
     source /root/.zshrc && \
